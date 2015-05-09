@@ -3,7 +3,7 @@
 Easy subtitle editor. Create or fix unmatched subtitles.
 
 Feature :
-- Import from .srt file and edit.
+- Import and edit subtitle from .srt file.
 - Create subtitle easily and download it.
 - Fix unmatched subtitles.
 
