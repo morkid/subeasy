@@ -7,3 +7,4 @@ Feature :
 - Create subtitle easily and download it.
 - Fix unmatched subtitles.
 
+[!Sub.Easy](https://raw.githubusercontent.com/morkid/subeasy/master/public/images/SUB-EASY.png)
