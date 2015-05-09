@@ -8,6 +8,7 @@ if(isset($_POST['collection_movie']) && isset($_FILES['srt'])){
 		$context = file_get_contents($file->tmp_name);
 		$context = str_replace("\r\n","\n",$context);
 		$context = explode("\n\n",$context);
+
 		$filename = mysql_real_escape_string($file->name);
 		if($context){
 			$query[] = "INSERT INTO se_collection (collection_movie,collection_language,collection_filename) 
@@ -17,9 +18,10 @@ if(isset($_POST['collection_movie']) && isset($_FILES['srt'])){
 		$max_length = 0;
 		foreach($context as $n => $text) {
 			$text_data = explode("\n",$text);
-			$sub_index = (int)$text_data[0];
+			$sub_index = $text_data[0];
 			if(!$text_data || !$sub_index)
 				continue;
+			$sub_index = preg_replace("/[^\d]/",'',$sub_index);
 			
 			$text_time = preg_replace("/[^\w\d\:\,\-]/","",$text_data[1]);
 			$text_time = explode("--",$text_time);
@@ -50,9 +52,10 @@ if(isset($_POST['collection_movie']) && isset($_FILES['srt'])){
 				$min_length = (int)$sub_start;
 			$max_length = (int)$sub_end;
 		}
+
 		$query[] = "COMMIT";
 		if(count($query) > 3){
-			foreach($query as $q):mysql_query($q)or die(mysql_error());endforeach;
+			foreach($query as $q):mysql_query($q);endforeach;
 			$max = mysql_query("SELECT MAX(collection_id) FROM se_collection");
 			$id = mysql_fetch_row($max);
 			$id = $id[0];

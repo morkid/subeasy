@@ -4,9 +4,11 @@ if(isset($_GET['id'])):
 	$query = mysql_query("SELECT * FROM se_collection WHERE collection_id = '{$id}' LIMIT 1");
 	$collections = mysql_fetch_object($query)or die(mysql_error());
 	header("Content-type: text/plain");
+	header("Content-Transfer-Encoding: UTF-8");
 	header("Content-Disposition: attachment; filename={$collections->collection_filename}");
 	header("Pragma: no-cache");
 	header("Expires: 0");
+
 	$query2 = mysql_query("SELECT * FROM se_subtitle 
 		WHERE collection_id = '{$id}' 
 		ORDER BY ABS(subtitle_index) ASC, subtitle_start ASC")or die(mysql_error());
@@ -18,7 +20,7 @@ if(isset($_GET['id'])):
 		$text[] = $o->subtitle_index;
 		$text[] = ms_to_time($o->subtitle_start)." --> ".ms_to_time($o->subtitle_end);
 		$template = '%s';
-		if($o->subtitle_color)
+		if($o->subtitle_color && strtolower($o->subtitle_color) != '#ffffff')
 			$template = '<font color="'.$o->subtitle_color.'">%s</font>';
 		$text[] = sprintf($template, $o->subtitle_text);
 		$subtitles[] = implode("\n",$text);
