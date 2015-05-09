@@ -1,0 +1,10 @@
+<?php
+define('DB_HOST','localhost');
+define('DB_NAME','dbname');
+define('DB_USER','username');
+define('DB_PASS','password');
+define('DB_PORT','3306');
+
+$DB_HOST = !empty(DB_PORT) ? DB_HOST.":".DB_PORT : DB_HOST;
+$conn_id = mysql_connect($DB_HOST,DB_USER,DB_PASS);
+mysql_select_db(DB_NAME,$conn_id);
