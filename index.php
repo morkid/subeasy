@@ -1,5 +1,5 @@
 <?php
-// error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 
 define("ROOT_DIR",str_replace("\\","/",pathinfo(__FILE__,PATHINFO_DIRNAME)."/"));
 define("CONFIG_DIR",ROOT_DIR."src/config/");
