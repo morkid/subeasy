@@ -4,7 +4,7 @@ if(isset($_GET['id'])):
 	$query = mysql_query("SELECT * FROM se_collection WHERE collection_id = '{$id}' LIMIT 1");
 	$collections = mysql_fetch_object($query)or die(mysql_error());
 	header("Content-type: text/plain");
-	header("Content-Disposition: attachment; filename={$collections->collection_filename}.srt");
+	header("Content-Disposition: attachment; filename={$collections->collection_filename}");
 	header("Pragma: no-cache");
 	header("Expires: 0");
 	$query2 = mysql_query("SELECT * FROM se_subtitle 
